@@ -20,31 +20,30 @@ void execute_command(const char *command)
 {
     pid_t child_pid = fork();  /* Create a new process */
 
-    char *env[] = {NULL};  /* Array of environment variables for the child process */
-
     if (child_pid == -1) {
         /* Fork failed, print error message and exit */
-        ed_print("ERROR FORKING PROCESS.\n");
+        perror("fork");
         exit(EXIT_FAILURE);
     } else if (child_pid == 0) {
         /* Child process */
+        char *env[] = {NULL};  /* Array of environment variables for the child process */
         char *args[128];  /* Array of command arguments */
         int arg_count = 0;  /* Argument counter */
 
         /* Tokenize the command string into arguments */
         char *token = strtok((char *) command, " ");
-        while (token != NULL) {
+        while (token != NULL && arg_count < 127) {
             args[arg_count++] = token;
             token = strtok(NULL, " ");
         }
         args[arg_count] = NULL;  /* Null-terminate the argument list */
 
         /* Execute the command */
-        execve(args[0], args, env);
-
-        /* If execve fails, print error message and exit */
-        ed_print("Error executing command.\n");
-        exit(EXIT_FAILURE);
+        if (execve(args[0], args, env) == -1) {
+            /* If execve fails, print error message and exit */
+            perror("execve");
+            exit(EXIT_FAILURE);
+        }
     } else {
         /* Parent process */
         wait(NULL);  /* Wait for the child process to finish executing */

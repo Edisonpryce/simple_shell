@@ -15,6 +15,15 @@ typedef struct info {
     int err_num;
 } info_t;
 
+/* Define the structure for a linked list node */
+typedef struct list_node {
+    char *str;
+    struct list_node *next;
+} list_node_t;
+
+/* Define the type for the linked list */
+typedef list_node_t *list_t;
+
 /* Define info_t or include the appropriate header file where info_t is defined */
 
 /**
@@ -119,6 +128,12 @@ int _myhelp(info_t *);
 /* toem_builtin1.c */
 int _myhistory(info_t *);
 int _myalias(info_t *);
+
+/* atoi.c */
+int interactive(info_t *);
+int my_delim(char, char *);
+int _myalpha(int);
+int _atoi(char *);
 
 #endif /* SHELL_H */
 
