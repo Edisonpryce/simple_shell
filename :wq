@@ -11,6 +11,9 @@
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH '\0'
 
+/* Define the constant CONVERT_LOWERCASE */
+#define CONVERT_LOWERCASE 1
+
 /* Define the structure for a linked list node */
 typedef struct list_node {
     char *str;
@@ -84,18 +87,9 @@ int _myalpha(int);
 int _atoi(char *);
 
 /* toem_errors.c */
-void _eputs(char *);
+void _eputs(const char *);  /* Updated declaration */
 int _eputchar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 
-/* toem_memory */
-int bfree(void **ptr);
-
-/* toem_parser */
-int is_cmd(info_t *info, char *path);
-char *dup_chars(char *pathstr, int start, int stop);
-char *find_path(info_t *info, char *pathstr, char *cmd);
-
 #endif /* SHELL_H */
-
