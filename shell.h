@@ -97,5 +97,15 @@ int is_cmd(info_t *info, char *path);
 char *dup_chars(char *pathstr, int start, int stop);
 char *find_path(info_t *info, char *pathstr, char *cmd);
 
-#endif /* SHELL_H */
+/*toem_realloc*/
+char *_memset(char *s, char b, unsigned int n);
+void ffree(char **pp);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
+/*toem_string1*/
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
+char *starts_with(const char *haystack, const char *needle);
+char *_strcat(char *dest, char *src);
+
+#endif /* SHELL_H */
